@@ -1,0 +1,126 @@
+<%- include('partials/head'); %>
+<style>
+  body {
+    background: #007bff;
+    background: linear-gradient(to right, #0062e6, #33aeff);
+  }
+
+  .card-img-left {
+    width: 45%;
+    /* Link to your background image using in the property below! */
+    background: scroll center
+      url("https://source.unsplash.com/WEQbe2jBg40/414x512");
+    background-size: cover;
+  }
+
+  .btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .btn-google {
+    color: white !important;
+    background-color: #ea4335;
+  }
+
+  .btn-facebook {
+    color: white !important;
+    background-color: #3b5998;
+  }
+</style>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div
+          class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden"
+        >
+          <div class="card-img-left d-none d-md-flex">
+            <!-- Background image for card set in CSS! -->
+          </div>
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5">
+              Formulario de registro
+            </h5>
+            <% if (locals.errors && errors) { %>
+            <div class="alert alert-danger fade show" role="alert">
+              <strong>Ops!</strong> Hay errores en el formulario
+            </div>
+            <% } %>
+            <form action="/users/create" method="post">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control <%= locals.errors && errors.user ? 'is-invalid' : '' %>"
+                  id="floatingInputUsername"
+                  name="user"
+                  value="<%= locals.oldData ? oldData.user : null%>"
+                />
+                <label for="floatingInputUsername">Usuario</label>
+                <% if (locals.errors && errors.user) { %>
+                <div class="text-danger"><%= errors.user.msg %></div>
+                <% } %>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control <%= locals.errors && errors.email ? 'is-invalid' : '' %>"
+                  id="floatingInputEmail"
+                  name="email"
+                  value="<%= locals.oldData ? oldData.email : null%>"
+                />
+                <label for="floatingInputEmail">Email</label>
+                <% if (locals.errors && errors.email) { %>
+                <div class="text-danger"><%= errors.email.msg %></div>
+                <% } %>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control <%= locals.errors && errors.password ? 'is-invalid' : '' %>"
+                  id="floatingPassword"
+                  name="password"
+                />
+                <label for="floatingPassword">Password</label>
+                <% if (locals.errors && errors.password) { %>
+                <div class="text-danger"><%= errors.password.msg %></div>
+                <% } %>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Imágen de perfil</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  name="img-user"
+                  id=""
+                  aria-describedby="helpId"
+                  placeholder=""
+                />
+              </div>
+              <div class="d-grid mb-2">
+                <button
+                  type="submit"
+                  class="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
+                >
+                  Registrarse
+                </button>
+              </div>
+            </form>
+
+            <a class="d-block text-center mt-2 small" href="/login"
+              >¿Ya tienes una cuenta? - Ingresá acá.</a
+            >
+            <hr class="my-4" />
+
+            <div class="mb-2">
+              <a href="/" class="btn btn-google btn-login fw-bold">
+                <i class="bi bi-house"></i> Volver a inicio
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
