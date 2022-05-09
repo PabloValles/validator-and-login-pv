@@ -48,7 +48,11 @@
               <strong>Ops!</strong> Hay errores en el formulario
             </div>
             <% } %>
-            <form action="/users/create" method="post">
+            <form
+              action="/users/create"
+              method="post"
+              enctype="multipart/form-data"
+            >
               <div class="form-floating mb-3">
                 <input
                   type="text"
@@ -88,15 +92,18 @@
                 <% } %>
               </div>
               <div class="mb-3">
-                <label for="" class="form-label">Imágen de perfil</label>
+                <label for="img-user" class="form-label"
+                  >Imágen de perfil</label
+                >
                 <input
                   type="file"
-                  class="form-control"
-                  name="img-user"
-                  id=""
-                  aria-describedby="helpId"
-                  placeholder=""
+                  class="form-control <%= locals.errors && errors.avatar ? 'is-invalid' : '' %>"
+                  name="avatar"
+                  id="img-user"
                 />
+                <% if (locals.errors && errors.avatar) { %>
+                <div class="text-danger"><%= errors.avatar.msg %></div>
+                <% } %>
               </div>
               <div class="d-grid mb-2">
                 <button
